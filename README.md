@@ -17,7 +17,7 @@ Du kommer även under arbetets gång få hjälp med hur du kan göra utvecklinge
 - Utvecklingsdagbok i dokument på classroom
 - CSS är inget krav men är uppmuntrat
 - Halvtidsavstämning v.10 på lektion (feedback av lärare, ha kod redo att visa upp). 
-- v.15 slutinlämning
+- v.16 slutinlämning
 - Vid slutinlämning: Lämna in en liten film på classroom som visar applikationen 
 
 ## Lektionsstruktur
