@@ -12,7 +12,7 @@ Du kommer även under arbetets gång få hjälp med hur du kan göra utvecklinge
 - Valfri applikation, tex webbshop, forum, föreningssida med användare, företagssida med olika användare...
 - *Individuellt* projekt
 - Skapa en GH-användare med namn `ntijoh-fornamn-efternamn`.
-- Forka grundrepo: https://github.com/ntijoh/tf.git
+- Forka grundrepo: https://github.com/ntijoh/WTF24.git
 - Bjud in mig (`ntijoh-daniel-berg`)
 - Utvecklingsdagbok i dokument på classroom
 - CSS är inget krav men är uppmuntrat
@@ -39,15 +39,12 @@ Du kommer även under arbetets gång få hjälp med hur du kan göra utvecklinge
 | 10    	| Feedback                               	|
 | 11    	| Arbete                                 	|
 | 12    	| Arbete                                 	|
-| _13_    	| _Resursdag_                           	|
+| _13_    | _Resursdag_                           	|
 | _14_  	| _Påsklov_                              	|
 | 15    	| Arbete                                 	|
-| 16    	| Arbete/Slutinlämning                     	|                                
-| 17    	| Eventuell komplettering                   |
-| _18_    	| _NP SV3_                                 	|
-| _19_    	| _Kristi himmelsfärds dag (ledigt)_        |
-| 20    	| Eventuell komplettering                  	|
-| 21     	| Eventuell komplettering, betygsinfo      	|
-
-
-
+| 16    	| Arbete/Slutinlämning                   	|                                
+| 17    	| Eventuell komplettering                 |
+| _18_    | _NP SV3_                               	|
+| _19_    | _Kristi himmelsfärds dag (ledigt)_      |
+| 20    	| Eventuell komplettering                	|
+| 21     	| Eventuell komplettering, betygsinfo    	|
