@@ -1,0 +1,15 @@
+<h1>List of Plugs</h1>
+<ol>
+  <% @plugs.each do |plug| %>
+    <li>
+      <a href="/plugs/<%= plug['id'] %>">
+        <%= plug['name'] %>
+      </a>
+    </li>
+  <% end %>
+</ol>
+<form action='/plugs/' method='post'> 
+  <input type='text' name='name'></input> 
+  <input type='text' name='vara'></input>
+  <button type='submit'>Send</button>
+</form>
