@@ -1,0 +1,14 @@
+
+<h2><%= @vara['name'] %></h2>
+<pre> 
+  <p><%= @vara['description'] %></p> 
+</pre>
+
+<% if @user = 'admin' %>
+  <form action='/varor/<%= @vara['id'] %>/delete' method='post'> 
+    <button type="submit">DELETE</button>
+  </form>
+  <a href='/varor/<%= @vara['id'] %>/update'> UPDATE </a> <br></br>
+<% end %>
+
+<a href='/varor'> Hemsida </a>
