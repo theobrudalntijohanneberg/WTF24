@@ -51,5 +51,13 @@ class App < Sinatra::Base
         erb :'varor/show'
     end
 
-    
+    post '/new' do
+        username = params['username']
+        email = params['email']   
+        cleartext_password = params['password'] 
+        hashed_password = BCrypt::Password.create(cleartext_password)
+        query = 'INSERT INTO customer_data (username, email, password) VALUES (?, ?, ?) RETURNING *'
+        result = db.execute(query, username, email, cleartext_password).first 
+        redirect "/varor"
+    end
 end
