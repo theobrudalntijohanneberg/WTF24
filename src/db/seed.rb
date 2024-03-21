@@ -9,25 +9,25 @@ def db
 end
 
 def drop_tables
-  db.execute('DROP TABLE IF EXISTS customer')
-  db.execute('DROP TABLE IF EXISTS varor')  # Changed from product to varor
+  db.execute('DROP TABLE IF EXISTS customer_data')
+  db.execute('DROP TABLE IF EXISTS varor')
   db.execute('DROP TABLE IF EXISTS cart')
-  db.execute('DROP TABLE IF EXISTS "order"') # Use double quotes for order since it's a reserved keyword
+  db.execute('DROP TABLE IF EXISTS "order"')
   db.execute('DROP TABLE IF EXISTS order_item')
 end
 
 def create_tables
-  db.execute('CREATE TABLE IF NOT EXISTS customer (
+  db.execute('CREATE TABLE IF NOT EXISTS customer_data (
                   id INTEGER PRIMARY KEY AUTOINCREMENT,
                   username TEXT NOT NULL,
                   email TEXT NOT NULL,
-                  password TEXT NOT NULL,
-                  address TEXT NOT NULL
+                  hashed_password TEXT NOT NULL,
+                  address TEXT 
               )')
   db.execute('CREATE TABLE IF NOT EXISTS varor (
+                  name TEXT NOT NULL UNIQUE,
                   id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                  username TEXT NOT NULL UNIQUE, 
-                  description TEXT, 
+                  description TEXT NOT NULL, 
                   price INTEGER NOT NULL 
               )')
   db.execute('CREATE TABLE IF NOT EXISTS cart ( 
@@ -48,27 +48,27 @@ end
 
 def seed_tables
   customer_data = [
-    { username: 'Bamse', email: 'bamse@mail.com', address: 'dunder honung', password: '1234' },
-    { username: 'skutt', email: 'skutt@mail.com', address: 'skuttvägen 4', password: '45678' },
-    { username: 'Erick', email: 'erick@mail.com', address: 'pankakaksvägem 4', password: '45678' },
-    { username: 'MrMilk', email: 'mrmilk@mail.com', address: 'milkroad 4', password: '45678' }
+    { username: 'Bamse', email: 'bamse@mail.com', address: 'dunder honung', hashed_password: '1234' },
+    { username: 'skutt', email: 'skutt@mail.com', address: 'skuttvägen 4', hashed_password: '45678' },
+    { username: 'Erick', email: 'erick@mail.com', address: 'pankakaksvägem 4', hashed_password: '45678' },
+    { username: 'MrMilk', email: 'mrmilk@mail.com', address: 'milkroad 4', hashed_password: '45678' }
   ]
 
   customer_data.each do |customer|
-    db.execute('INSERT INTO customer (username, address, email, password) VALUES (?, ?, ?, ?)',
-               customer[:username], customer[:address], customer[:email], customer[:password])
+    db.execute('INSERT INTO customer_data (username, email, address, hashed_password) VALUES (?, ?, ?, ?)',
+               customer[:username], customer[:email], customer[:address], customer[:hashed_password])
   end
 
   varor = [
-    { username: 'dunder honung', description: 'honung fast dunder', price: 2 },
-    { username: 'vanlig honung', description: 'helt vanlig honung', price: 1 },
-    { username: 'pankakor', description: 'smaskiga frasiga pankakor från erickspankakor', price: 3 },
-    { username: 'mjölk', description: 'kossa', price: 2 }
+    { name: 'dunder honung', description: 'honung fast dunder', price: 2 },
+    { name: 'vanlig honung', description: 'helt vanlig honung', price: 1 },
+    { name: 'pankakor', description: 'smaskiga frasiga pankakor från erickspankakor', price: 3 },
+    { name: 'mjölk', description: 'kossa', price: 2 }
   ]
 
   varor.each do |vara|
-    db.execute('INSERT INTO varor (username, description, price) VALUES (?, ?, ?)',
-               vara[:username], vara[:description], vara[:price])
+    db.execute('INSERT INTO varor (name, description, price) VALUES (?, ?, ?)',
+               vara[:name], vara[:description], vara[:price])
   end
 end
 

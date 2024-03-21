@@ -6,7 +6,7 @@
 
 <% if @user = 'admin' %>
   <form action='/varor/<%= @vara['id'] %>/delete' method='post'> 
-    <button type="submit">DELETE</button>
+    <button type="submit">Ta bort</button>
   </form>
   <a href='/varor/<%= @vara['id'] %>/update'> UPDATE </a> <br></br>
 <% end %>

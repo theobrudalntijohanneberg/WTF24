@@ -54,10 +54,29 @@ class App < Sinatra::Base
     post '/new' do
         username = params['username']
         email = params['email']   
-        cleartext_password = params['password'] 
-        hashed_password = BCrypt::Password.create(cleartext_password)
-        query = 'INSERT INTO customer_data (username, email, password) VALUES (?, ?, ?) RETURNING *'
-        result = db.execute(query, username, email, cleartext_password).first 
+        cleartext_password = params['cleartext_password'] 
+        hashed_password = BCrypt::Password.create(cleartext_password)  # Hash the password
+        query = 'INSERT INTO customer_data (username, email, hashed_password) VALUES (?, ?, ?) RETURNING *'
+        result = db.execute(query, username, email, hashed_password).first 
         redirect "/varor"
+    end
+
+    post '/login' do
+        username = params['username']
+        cleartext_password= params['cleartext_password'] 
+
+        #hämta användare och lösenord från databasen med hjälp av det inmatade användarnamnet.
+        user = db.execute('SELECT * FROM customer_data WHERE username = ?', username).first
+
+        #omvandla den lagrade saltade hashade lösenordssträngen till en riktig bcrypt-hash
+        password_from_db = BCrypt::Password.new(user['password'])
+
+        #jämför lösenordet från databasen med det inmatade lösenordet
+        if password_from_db == clertext_password 
+        session[:user_id] = user['id'] 
+             
+        else
+        halt 404, 'fel lösenord' 
+        end
     end
 end
