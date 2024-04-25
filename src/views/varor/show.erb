@@ -4,7 +4,7 @@
   <p><%= @vara['description'] %></p> 
 </pre>
 
-<% if @user = 'admin' %>
+<% if @user['id'] = '1' %>
   <form action='/varor/<%= @vara['id'] %>/delete' method='post'> 
     <button type="submit">Ta bort</button>
   </form>
