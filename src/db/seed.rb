@@ -1,5 +1,5 @@
 require 'sqlite3'
-
+require 'bcrypt'
 def db
   if @db == nil
     @db = SQLite3::Database.new('./src/db/db.sqlite')
@@ -48,10 +48,10 @@ end
 
 def seed_tables
   customer_data = [
-    { username: 'Bamse', email: 'bamse@mail.com', address: 'dunder honung', hashed_password: '1234' },
-    { username: 'skutt', email: 'skutt@mail.com', address: 'skuttvägen 4', hashed_password: '45678' },
-    { username: 'Erick', email: 'erick@mail.com', address: 'pankakaksvägem 4', hashed_password: '45678' },
-    { username: 'MrMilk', email: 'mrmilk@mail.com', address: 'milkroad 4', hashed_password: '45678' }
+    { username: 'Bamse', email: 'bamse@mail.com', address: 'dunder honung', hashed_password: BCrypt::Password.create('1234') },
+    { username: 'skutt', email: 'skutt@mail.com', address: 'skuttvägen 4', hashed_password: BCrypt::Password.create('45678') },
+    { username: 'Erick', email: 'erick@mail.com', address: 'pankakaksvägem 4', hashed_password:BCrypt::Password.create('45678') },
+    { username: 'MrMilk', email: 'mrmilk@mail.com', address: 'milkroad 4', hashed_password:BCrypt::Password.create('45678') }
   ]
 
   customer_data.each do |customer|

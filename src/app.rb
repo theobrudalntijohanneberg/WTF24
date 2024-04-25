@@ -51,6 +51,11 @@ class App < Sinatra::Base
         erb :'varor/show'
     end
 
+    get '/fel' do 
+        erb :'varor/fel'
+       
+    end
+
     post '/new' do
         username = params['username']
         email = params['email']   
@@ -67,16 +72,18 @@ class App < Sinatra::Base
 
         #hämta användare och lösenord från databasen med hjälp av det inmatade användarnamnet.
         user = db.execute('SELECT * FROM customer_data WHERE username = ?', username).first
-
+        p user
         #omvandla den lagrade saltade hashade lösenordssträngen till en riktig bcrypt-hash
-        password_from_db = BCrypt::Password.new(user['password'])
+        password_from_db = BCrypt::Password.new(user['hashed_password'])
 
         #jämför lösenordet från databasen med det inmatade lösenordet
-        if password_from_db == clertext_password 
-        session[:user_id] = user['id'] 
-             
+        if password_from_db == cleartext_password 
+            session[:user_id] = user['id'] 
+            redirect "/varor"
+        p user['id']
         else
-        halt 404, 'fel lösenord' 
+        redirect "/fel"
         end
+        
     end
 end
