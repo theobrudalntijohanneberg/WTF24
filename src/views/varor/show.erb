@@ -3,12 +3,11 @@
 <pre> 
   <p><%= @vara['description'] %></p> 
 </pre>
-
-<% if @user['id'] = '1' %>
+<%=  session[:user_id] %>
+<% if session[:user_id] == 1 %>
   <form action='/varor/<%= @vara['id'] %>/delete' method='post'> 
     <button type="submit">Ta bort</button>
   </form>
-  <a href='/varor/<%= @vara['id'] %>/update'> UPDATE </a> <br></br>
 <% end %>
 
 <a href='/varor'> Hemsida </a>

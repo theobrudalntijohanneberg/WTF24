@@ -1,9 +1,8 @@
 <% @varor.each do |vara| %>
     <li>
         <a href="/varor/<%=vara[1]%>"><%=vara[0]%></a>
-    </li>
+    </li> 
 <% end %>
-
 <form action='/varor/new' method='post'> 
   <input type='text' name='name'></input>
   <input type='text' name='description'></input>

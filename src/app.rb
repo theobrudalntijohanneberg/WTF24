@@ -1,6 +1,9 @@
     
 class App < Sinatra::Base
 
+    
+    enable :sessions
+
     def db
         if @db == nil
             @db = SQLite3::Database.new('./db/db.sqlite')
@@ -46,16 +49,12 @@ class App < Sinatra::Base
     end
 
     get '/varor/:id' do |id|
+        @user_id = session[:user_id] 
+
         @vara = db.execute('SELECT * FROM varor WHERE id = ?', id).first
 
         erb :'varor/show'
     end
-
-    get '/fel' do 
-        erb :'varor/fel'
-       
-    end
-
     post '/new' do
         username = params['username']
         email = params['email']   
@@ -63,7 +62,7 @@ class App < Sinatra::Base
         hashed_password = BCrypt::Password.create(cleartext_password)  # Hash the password
         query = 'INSERT INTO customer_data (username, email, hashed_password) VALUES (?, ?, ?) RETURNING *'
         result = db.execute(query, username, email, hashed_password).first 
-        redirect "/varor"
+        redirect "/"
     end
 
     post '/login' do
@@ -71,19 +70,23 @@ class App < Sinatra::Base
         cleartext_password= params['cleartext_password'] 
 
         #hämta användare och lösenord från databasen med hjälp av det inmatade användarnamnet.
-        user = db.execute('SELECT * FROM customer_data WHERE username = ?', username).first
-        p user
+        @user = db.execute('SELECT * FROM customer_data WHERE username = ?', username).first
+        
         #omvandla den lagrade saltade hashade lösenordssträngen till en riktig bcrypt-hash
-        password_from_db = BCrypt::Password.new(user['hashed_password'])
+        password_from_db = BCrypt::Password.new(@user['hashed_password'])
 
         #jämför lösenordet från databasen med det inmatade lösenordet
         if password_from_db == cleartext_password 
-            session[:user_id] = user['id'] 
+            session[:user_id] = @user['id'] 
             redirect "/varor"
-        p user['id']
         else
         redirect "/fel"
         end
         
+    end
+
+    get '/fel' do 
+        erb :'varor/fel'
+       
     end
 end
