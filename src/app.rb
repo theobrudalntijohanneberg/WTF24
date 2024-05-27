@@ -16,6 +16,9 @@ class App < Sinatra::Base
         erb :'varor/index'
     end
 
+    get '/hack' do 
+        erb:'varor/hacker'
+    end 
     post '/varor/new' do 
         name = params['name'] 
         description = params['description']
@@ -39,8 +42,12 @@ class App < Sinatra::Base
     end
 
     post '/varor/:id/delete' do |id| 
-        db.execute('DELETE FROM varor WHERE id = ?', id)
-        redirect "/varor"
+        if session[:user_id] == 1 
+            db.execute('DELETE FROM varor WHERE id = ?', id)
+            redirect "/varor"
+        else 
+            redirect"/hack"
+        end 
       end
 
     get '/varor' do 
